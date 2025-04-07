@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Heart Disease Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Heart Disease Prediction">
+  <meta name="keywords" content="Dashboard">
+  <meta name="author" content="codedthemes">
+
+  <!-- [Favicon] icon -->
+<link rel="icon" href="../static/images/favicon.svg" type="image/x-icon"> <!-- [Google Font : Poppins] icon -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/fonts/tabler-icons.min.css" >
+<link rel="stylesheet" href="../static/fonts/feather.css" >
+<link rel="stylesheet" href="../static/fonts/fontawesome.css" >
+<link rel="stylesheet" href="../static/fonts/material.css" >
+<link rel="stylesheet" href="../static/css/style.css" id="main-style-link" >
+<link rel="stylesheet" href="../static/css/style-preset.css" >
+
+
+</head>
+
+<!-- [Body] Start -->
+<body data-pc-header="header-1" data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
+  <!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+  <div class="loader-track">
+    <div class="loader-fill"></div>
+  </div>
+</div>
+<!-- [ Pre-loader ] End -->
+ <!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="dashboard.html" class="b-brand text-primary">
+        <!-- ========   Change your logo from here   ============ -->
+        <img src="../static/images/logo.png" alt="logo image" class="logo-lg">
+      </a>
+    </div>
+    <div class="navbar-content">
+      <ul class="pc-navbar">
+        <!-- <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li> -->
+        <!-- <li class="pc-item">
+          <a href="dashboard.html" class="pc-link"
+            ><span class="pc-micon">
+              <i class="ph ph-gauge"></i></span
+            ><span class="pc-mtext">Dashboard</span></a>
+        </li> -->
+        <li class="pc-item pc-caption">
+            <label>Navigation</label>
+            <i class="ph ph-compass-tool"></i>
+        </li>       
+        <li class="pc-item">
+          <a href="." class="pc-link">
+            <span class="pc-micon"><i class="ph ph-devices"></i></span>
+            <span class="pc-mtext">Predict</span>
+          </a>
+        </li>
+      </ul>      
+    </div>
+  </div>
+</nav>
+
+<!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
+<header class="pc-header">
+  <div class="m-header">
+    <a href="../dashboard/index.html" class="b-brand text-primary">      
+      <img src="../static/images/logo.png" alt="logo image" class="logo-lg">
+    </a>
+  </div>
+  <div class="header-wrapper"> 
+<div class="me-auto pc-mob-drp">
+  <ul class="list-unstyled">
+    <!-- ======= Menu collapse Icon ===== -->
+    <li class="pc-h-item pc-sidebar-collapse">
+      <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+        <i class="ph ph-list"></i>
+      </a>
+    </li>
+    <li class="pc-h-item pc-sidebar-popup">
+      <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+        <i class="ph ph-list"></i>
+      </a>
+    </li>
+    <li class="dropdown pc-h-item">
+      <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button"
+        aria-haspopup="false" aria-expanded="false">
+        <i class="ph ph-magnifying-glass"></i>
+      </a>
+      <div class="dropdown-menu pc-h-dropdown drp-search">
+        <form class="px-3">
+          <div class="form-group mb-0 d-flex align-items-center">
+            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+            <button class="btn btn-light-secondary btn-search">Search</button>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="ms-auto">
+  <ul class="list-unstyled">
+    <li class="dropdown pc-h-item header-user-profile">
+      <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
+        aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
+        <img src="../static/images/user/avatar-1.jpg" alt="user-image" class="user-avtar">
+      </a>
+      <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
+        <div class="dropdown-body">
+          <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
+            <ul class="list-group list-group-flush w-100">
+              
+                <a href="#" class="dropdown-item">
+                  <span class="d-flex align-items-center">
+                    <i class="ph ph-power"></i>
+                    <span>Logout</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div> </div>
+</header>
+<!-- [ Header ] end -->
+ <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content">
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+        <div class="page-block card mb-0">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <div class="page-header-title border-bottom pb-2 mb-2">
+                  <h4 class="mb-0">Heart Disease Prediction</h4>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html"><i class="ph ph-house"></i></a></li>                  
+                  <li class="breadcrumb-item" aria-current="page">Heart Disease Prediction</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+
+      <!-- [ Main Content ] start -->
+      <form class="row g-3 needs-validation" novalidate action="/predict" method="post" >
+      <div class="row">      
+      
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">
+              <h4> Curious about your heart's condition? This app will help you diagnose it!</h4>
+            </div>
+            <div class="card-body pc-component">
+              <p class="lead m-t-0">Feature Selection</p>
+                   
+              <div class="form-row">                    
+                <div class="form-group col">
+                   <label for="drpAge"  class="form-label">Age Category</label>
+                   <select id="drpAge" name="age" class="form-control" aria-label="Default select example" required >
+                    <option selected disabled value="">Choose</option>
+                    <option value="0" {% if frm_age == '0' %}selected{% endif %}>Age 18 to 24</option>
+                    <option value="1" {% if frm_age == '1' %}selected{% endif %}>Age 25 to 29</option>
+                    <option value="2" {% if frm_age == '2' %}selected{% endif %}>Age 30 to 34</option>                    
+                    <option value="3" {% if frm_age == '3' %}selected{% endif %}>Age 35 to 39</option>
+                    <option value="4" {% if frm_age == '4' %}selected{% endif %}>Age 40 to 44</option>
+                    <option value="5" {% if frm_age == '5' %}selected{% endif %}>Age 45 to 49</option>
+                    <option value="6" {% if frm_age == '6' %}selected{% endif %}>Age 50 to 54</option>
+                    <option value="7" {% if frm_age == '7' %}selected{% endif %}>Age 55 to 59</option>
+                    <option value="8" {% if frm_age == '8' %}selected{% endif %}>Age 60 to 64</option>
+                    <option value="9" {% if frm_age == '9' %}selected{% endif %}>Age 65 to 69</option>
+                    <option value="10" {% if frm_age == '10' %}selected{% endif %}>Age 70 to 74</option>
+                    <option value="11" {% if frm_age == '11' %}selected{% endif %}>Age 75 to 79</option>
+                    <option value="12" {% if frm_age == '12' %}selected{% endif %}>Age 80 or older</option>                   
+                  </select> 
+                  <div class="invalid-feedback">
+                    Please provide a valid Age Category.
+                  </div>            
+               </div>
+               <div class="form-group col">
+                   <label for="drpGndr" class="control-label">Gender</label>
+                   <select id="drpGndr" name="gender" class="form-select" aria-label="Default select example" required>
+                    <option selected disabled value="">Choose</option>
+                    <option value="0" {% if frm_gender == '0' %}selected{% endif %}>Male</option>
+                    <option value="1" {% if frm_gender == '1' %}selected{% endif %}>Female</option>                    
+                  </select>    
+                  <div class="invalid-feedback">
+                    Please choose Gender.
+                  </div>               
+               </div>
+
+               <div class="form-group col">
+                <label for="drpGnrlHlth" class="control-label">General Health</label>
+                  <select id="drpGnrlHlth" name="gnrlhlth" class="form-select" aria-label="Default select example" required>
+                  <option selected disabled value="">Choose</option>
+                  <option value="0" {% if frm_gnrlhlth == '0' %}selected{% endif %}>Poor</option>
+                  <option value="1" {% if frm_gnrlhlth == '1' %}selected{% endif %}>Fair</option>                    
+                  <option value="2" {% if frm_gnrlhlth == '2' %}selected{% endif %}>Good</option>      
+                  <option value="3" {% if frm_gnrlhlth == '3' %}selected{% endif %}>Very good</option>      
+                  <option value="4" {% if frm_gnrlhlth == '4' %}selected{% endif %}>Excellent</option>                    
+                </select>  
+                <div class="invalid-feedback">
+                  Please choose Health Status.
+                </div>                      
+                </div> 
+                
+                <div class="form-group col">
+                  <label for="txtHght" class="control-label">Height in Meters</label>
+                  <input id="txtHght"  name="height" type="text" class="form-control" value="{{frm_height }}" placeholder="Height in Meters" required pattern="^\d+(\.\d+)?$" onchange=CalcBMI()> 
+                  <div class="invalid-feedback">
+                    Please provide a valid Height in Meters (e.g., 1.75).
+                  </div>                   
+               </div> 
+
+               <div class="form-group col">
+                <label for="txtWgt" class="control-label">Weight in Kilograms</label>
+                <input id="txtWgt" name="weight" type="text" class="form-control" value="{{frm_weight}}" placeholder="Weight in Kilograms" required pattern="^\d+(\.\d+)?$" onchange=CalcBMI()>
+                <div class="invalid-feedback">
+                  Please provide a valid Height in Meters (e.g., 60).
+                </div>      
+               </div> 
+
+               <div class="form-group col">
+                <label for="txtBMI" class="control-label">BMI</label>
+                <input id="txtBMI" name="bmi" type="text" class="form-control" value="{{frm_bmi}}"  placeholder="BMI" readonly>                
+               </div> 
+
+               <div class="form-group col">
+                <label class="control-label">Had Stroke</label>
+                <select id="drpHdStrk" name="stroke" class="form-select" aria-label="Default select example" >     
+                 <option value="0" {% if frm_stroke == '0' %}selected{% endif %}>No</option>
+                 <option value="1" {% if frm_stroke == '1' %}selected{% endif %}>Yes</option>                    
+               </select>                   
+              </div>
+  
+              <div class="form-group col">
+                <label class="control-label">Had Angina</label>
+                <select id="drpHdAngn" name ="angina" class="form-select" aria-label="Default select example" >           
+                 <option value="0" {% if frm_angina == '0' %}selected{% endif %}>No</option>
+                 <option value="1" {% if frm_angina == '1' %}selected{% endif %}>Yes</option>                    
+               </select>                   
+              </div>
+
+              <div class="form-group col">
+                <label class="control-label">Had COPD (Chronic Obstructive Pulmonary Disease) Status</label>
+                <select id="drpCODP" name="codp" class="form-select" aria-label="Default select example" >  
+                 <option value="0" {% if frm_codp == '0' %}selected{% endif %}>No</option>
+                 <option value="1" {% if frm_codp == '1' %}selected{% endif %}>Yes</option>                    
+               </select>                   
+              </div>
+
+              <div class="form-group col">
+                <label class="control-label">Chest Scan</label>           
+                <select id="drpChstScn" name="chestpain" class="form-select" aria-label="Default select example" >     
+                  <option value="0" {% if frm_chestpain == '0' %}selected{% endif %}>No</option>
+                  <option value="1" {% if frm_chestpain == '1' %}selected{% endif %}>Yes</option>                    
+                </select>                             
+               </select>                   
+              </div>
+  
+              <div class="form-group col">
+                <label for="drpSlpHrs" class="control-label">Sleep Hours</label>
+                <select id="drpSlpHrs" name="sleephours" class="form-select" aria-label="Default select example" required>
+                 <option selected disabled value="">Choose</option>
+                 <option value="1" {% if frm_sleephours == '1' %}selected{% endif %}>1</option>
+                 <option value="2" {% if frm_sleephours == '2' %}selected{% endif %}>2</option>
+                 <option value="3" {% if frm_sleephours == '3' %}selected{% endif %}>3</option>
+                 <option value="4" {% if frm_sleephours == '4' %}selected{% endif %}>4</option>
+                 <option value="5" {% if frm_sleephours == '5' %}selected{% endif %}>5</option>
+                 <option value="6" {% if frm_sleephours == '6' %}selected{% endif %}>6</option>
+                 <option value="7" {% if frm_sleephours == '7' %}selected{% endif %}>7</option>
+                 <option value="8" {% if frm_sleephours == '8' %}selected{% endif %}>8</option>
+                 <option value="9" {% if frm_sleephours == '9' %}selected{% endif %}>9</option>
+                 <option value="10" {% if frm_sleephours == '10' %}selected{% endif %}>10</option>
+                 <option value="11" {% if frm_sleephours == '11' %}selected{% endif %}>11</option>
+                 <option value="12" {% if frm_sleephours == '12' %}selected{% endif %}>12</option>
+                 <option value="13" {% if frm_sleephours == '13' %}selected{% endif %}>13</option>
+                 <option value="14" {% if frm_sleephours == '14' %}selected{% endif %}>14</option>
+                 <option value="15" {% if frm_sleephours == '15' %}selected{% endif %}>15</option>
+                 <option value="16" {% if frm_sleephours == '16' %}selected{% endif %}>16</option>
+                 <option value="17" {% if frm_sleephours == '17' %}selected{% endif %}>17</option>
+                 <option value="18" {% if frm_sleephours == '18' %}selected{% endif %}>18</option>
+                 <option value="19" {% if frm_sleephours == '19' %}selected{% endif %}>19</option>
+                 <option value="20" {% if frm_sleephours == '20' %}selected{% endif %}>20</option>
+                 <option value="21" {% if frm_sleephours == '21' %}selected{% endif %}>21</option>
+                 <option value="22" {% if frm_sleephours == '22' %}selected{% endif %}>22</option>
+                 <option value="23" {% if frm_sleephours == '23' %}selected{% endif %}>23</option>
+                 <option value="24" {% if frm_sleephours == '24' %}selected{% endif %}>24</option>
+               </select>
+               <div class="invalid-feedback">
+                Please choose Sleeping Hours.
+              </div>               
+            </div> 
+           
+            <div class="form-group col">
+              <label class="control-label">Smoke Status</label>
+              <select id="drpSmk" name="smokestatus" class="form-select" aria-label="Default select example" >           
+               <option value="0" {% if frm_smokestatus == '0' %}selected{% endif %}>No</option>
+               <option value="1" {% if frm_smokestatus == '1' %}selected{% endif %}>Yes</option>                    
+             </select>                   
+            </div> 
+            
+            <div class="form-group col">
+              <label class="control-label">Tetanus, Diphtheria, and Pertussis (Tdap) vaccine in the last 10 years</label>           
+              <select id="drpTdap" name="tdap" class="form-select" aria-label="Default select example" >     
+                <option value="0" {% if frm_tdap == '0' %}selected{% endif %}>No</option>
+                <option value="1" {% if frm_tdap == '1' %}selected{% endif %}>Yes</option>                    
+              </select>                             
+             </select>                   
+            </div>
+            <div class="form-group col">
+              <label class="control-label">Covid vaccine</label>           
+              <select id="drpCvd" name="covid" class="form-select" aria-label="Default select example" >     
+                <option value="0" {% if frm_covid == '0' %}selected{% endif %}>No</option>
+                <option value="1" {% if frm_covid == '1' %}selected{% endif %}>Yes</option>                    
+              </select>                             
+             </select>                   
+            </div>           
+
+            <div class="form-group col">
+              <button type="submit" class="btn btn-primary">Predict</button>
+              <button type="button" class="btn btn-light-secondary" onclick="clearForm()">Clear</button>
+            </div>
+              </div>               
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          {% if heart_status %}
+          <div class="card">
+            <div class="card-header">
+              
+              <h3>Results</h3>
+            </div>
+
+            <div class="card-body pc-component">
+              Heart Disease Status
+           
+              <div class="{{heart_status_color}}">
+              {{ heart_status }}
+              </div>
+              
+              <!-- <p class="text-muted mb-1"> </p> -->
+            </div>
+
+            <div class="card-body pc-component">
+              Risk Category
+              {% if risk_category %}
+              <div class= "{{risk_category_color}}"> 
+               {{ risk_category }}
+              </div>
+              {% endif %}              
+            </div>
+
+            <div id="600f463e197b489aa6aff1bff4965b06" class="chart-container" style="width:500px; height:400px; "></div>
+
+            <div class="card-body pc-component">
+              <h5> Each Model Prediction</h5>
+              <br/>
+            
+              <div class="container text-left">
+                <div class="row align-items-start">
+                  <div class="col">
+                    Decision Tree
+                  </div>
+                  <div class="col" style="color: red;">
+                    {{ result_dt }}
+                  </div>                
+                </div>
+
+                <div class="row align-items-start">
+                  <div class="col">
+                    SVM
+                  </div>
+                  <div class="col" style="color: red;">
+                    {{ result_svm }}
+                  </div>                
+                </div>
+                
+                <div class="row align-items-start">
+                  <div class="col">
+                    Random Forest
+                  </div>
+                  <div class="col" style="color: red;">
+                    {{ result_rf }}
+                  </div>                
+                </div>
+
+                <div class="row align-items-start">
+                  <div class="col">
+                    CNN
+                  </div>
+                  <div class="col" style="color: red;">
+                    {{ result_cnn }}
+                  </div>                
+                </div>
+
+                <div class="row align-items-start">
+                  <div class="col">
+                    XG Boost
+                  </div>
+                  <div class="col" style="color: red;">
+                    {{ result_xg }}
+                  </div>                
+                </div>
+              </div>
+            </div>           
+          </div>
+        </div>   
+        {% endif %}       
+      </div>
+      </form>
+
+     
+      <!-- [ Main Content ] end -->
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+  <footer class="pc-footer">
+    <div class="footer-wrapper container-fluid">
+      <div class="row">
+        <div class="col-sm-6 my-1">
+          <p class="m-0">Heart Disease Prediction &#9829; Build by Gayanath Perera</p>
+        </div>
+        <div class="col-sm-6 ms-auto my-1">
+          <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">
+            <li class="list-inline-item"><a href=".">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script src="../static/js/main.js"></script>
+<script src="../static/js/plugins/jquery-3.5.1.min.js"></script>  
+<script type="text/javascript" src="../static/echarts/echarts.min.js"></script>
+<!-- <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script> -->
+  
+</body>
+</html> 
+
+<script>
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+function CalcBMI() {  
+    var height = parseFloat($('#txtHght').val());
+    var weight = parseFloat($('#txtWgt').val());  
+    if (!isNaN(height) && !isNaN(weight) && height > 0 && weight > 0) {     
+        var bmi = weight / (height * height);
+        $('#txtBMI').val(bmi.toFixed(2));
+    } else {
+        $('#txtBMI').val('');
+    }
+} 
+
+function clearForm() {     
+          window.location.href = "."
+        }
+
+</script>  
+
+<script>
+        var chart_600f463e197b489aa6aff1bff4965b06 = echarts.init(
+            document.getElementById('600f463e197b489aa6aff1bff4965b06'), 'white', {renderer: 'canvas'});
+        var option_600f463e197b489aa6aff1bff4965b06 = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#5470c6",
+        "#91cc75",
+        "#fac858",
+        "#ee6666",
+        "#73c0de",
+        "#3ba272",
+        "#fc8452",
+        "#9a60b4",
+        "#ea7ccc"
+    ],
+    "series": [
+        {
+            "type": "gauge",
+            "title": {
+                "show": true,
+                "offsetCenter": [
+                    "0%",
+                    "20%"
+                ],
+                "color": "#333",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "sans-serif",
+                "fontSize": 14,
+                "backgroundColor": "transparent",
+                "borderColor": "transparent",
+                "borderWidth": 0,
+                "borderRadius": 0,
+                "padding": 0,
+                "shadowColor": "transparent",
+                "shadowBlur": 0,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 0,
+                "overflow": "none",
+                "valueAnimation": true
+            },
+            "detail": {
+                "show": true,
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+                "borderColor": "transparent",
+                "offsetCenter": [
+                    "0%",
+                    "40%"
+                ],
+                "formatter": "{value}%",
+                "color": "#464646",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "sans-serif",
+                "fontSize": 15,
+                "borderRadius": 0,
+                "padding": 0,
+                "shadowColor": "transparent",
+                "shadowBlur": 0,
+                "shadowOffsetX": 0,
+                "shadowOffsetY": 0,
+                "overflow": "none",
+                "valueAnimation": true
+            },
+            "min": 0,
+            "max": 100,
+            "splitNumber": 10,
+            "center": [
+                "50%",
+                "50%"
+            ],
+            "radius": "75%",
+            "startAngle": 225,
+            "endAngle": -45,
+            "clockwise": true,
+            "data": [{
+                    "name": "Risk",
+                    "value": {{risk_probability}} 
+                }],
+            "axisLine": {
+                "show": true,
+                "onZero": true,
+                "onZeroAxisIndex": 0,
+                "lineStyle": {
+                    "show": true,
+                    "width": 30,
+                    "opacity": 5,
+                    "curveness": 0,
+                    "type": "solid",
+                    "color": [
+                        [
+                            0.4,
+                            "Green"
+                        ],
+                        [
+                            0.7,
+                            "orange"
+                        ],
+                        [
+                            1,
+                            "red"
+                        ]
+                    ]
+                }
+            },
+            "progress": {
+                "show": false,
+                "overlap": true,
+                "width": 10,
+                "roundCap": false,
+                "clip": false
+            },
+            "anchor": {
+                "show": true,
+                "showAbove": false,
+                "size": 6,
+                "icon": "circle",
+                "offsetCenter": [
+                    0,
+                    0
+                ],
+                "keepAspect": false
+            },
+            "pointer": {
+                "show": true,
+                "length": "80%",
+                "width": 8
+            },
+            "splitLine": {
+                "show": false,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            },
+            "axislabel_opts": {
+                "show": true,
+                "margin": 8,
+                "formatter": "{value}%"
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                ""
+            ],
+            "selected": {},
+            "show": false,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "title": [
+        {
+            "show": true,
+            "text": "Patient Risk Category",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ]
+};
+chart_600f463e197b489aa6aff1bff4965b06.setOption(option_600f463e197b489aa6aff1bff4965b06);
+</script>
